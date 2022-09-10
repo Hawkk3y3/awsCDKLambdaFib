@@ -21,15 +21,15 @@ func Handler(req events.APIGatewayV2HTTPRequest) (*events.APIGatewayV2HTTPRespon
 }
 
 func CalFib(req events.APIGatewayV2HTTPRequest) (*events.APIGatewayV2HTTPResponse, error) {
-	strNumber := req.QueryStringParameters["number"]
-	if strNumber == "" {
+	strIndex := req.QueryStringParameters["index"]
+	if strIndex == "" {
 		return apiResponse(http.StatusBadRequest, ErrorBody{aws.String("invalid query param")})
 	}
-	intNumber, err := strconv.Atoi(strNumber)
+	intIndex, err := strconv.Atoi(strIndex)
 	if err != nil {
 		return apiResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
 	}
 	memo := make(map[int]int)
-	result := pkg.CalculateFibUsingMemo(intNumber, memo)
+	result := pkg.CalculateFibUsingMemo(intIndex, memo)
 	return apiResponse(200, ResultBody{aws.Int(result)})
 }

@@ -1,13 +1,13 @@
 package pkg
 
-func CalculateFibUsingMemo(number int, memo map[int]int) int {
-	//calculates fibonachi number at number index provided with Memoization
-	if val, ok := memo[number]; ok {
+func CalculateFibUsingMemo(index int, memo map[int]int) int {
+	//Returns fibonacci number at index provided, by using Memoization
+	if val, ok := memo[index]; ok {
 		return val
 	}
-	if number <= 2 {
+	if index <= 2 {
 		return 1
 	}
-	memo[number] = CalculateFibUsingMemo(number-1, memo) + CalculateFibUsingMemo(number-2, memo)
-	return memo[number]
+	memo[index] = CalculateFibUsingMemo(index-1, memo) + CalculateFibUsingMemo(index-2, memo)
+	return memo[index]
 }
